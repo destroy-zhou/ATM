@@ -1,0 +1,156 @@
+
+accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
+  --task_name long_term_forecast \
+  --is_training 1 \
+  --root_path ../dataset/ETT-small/ \
+  --data_path ETTh2.csv \
+  --model ATM \
+  --data ETTh2 \
+  --features M \
+  --seq_len 96 \
+  --label_len 0 \
+  --pred_len 96 \
+  --factor 3 \
+  --enc_in 7 \
+  --itr 1 \
+  --d_model 32\
+  --inter_dim 32 \
+  --n_heads 8 \
+  --n_querys 8 \
+  --prob_bias 0.005 \
+  --prob_bias_end 70 \
+  --high_freq 1 \
+  --threshold_ratio 0.995 \
+  --aux_loss 1 \
+  --aux_loss_factor 0.15 \
+  --dropout 0.45 \
+  --head_dropout 0.1 \
+  --batch_size 32 \
+  --learning_rate 0.01 \
+  --conv_layers 3 \
+  --d_layers 1 \
+  --num_experts 8 \
+  --top_k 2 \
+  --use_moe 1 \
+  --apply_router_aux_loss 1 \
+  --router_aux_loss_factor 0.02 \
+  --train_epochs 20 \
+  --patience 4 \
+  --num_workers 4
+
+accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
+  --task_name long_term_forecast \
+  --is_training 1 \
+  --root_path ../dataset/ETT-small/ \
+  --data_path ETTh2.csv \
+  --model ATM \
+  --data ETTh2 \
+  --features M \
+  --seq_len 96 \
+  --label_len 0 \
+  --pred_len 192 \
+  --factor 3 \
+  --enc_in 7 \
+  --itr 1 \
+  --d_model 32\
+  --inter_dim 32 \
+  --n_heads 8 \
+  --n_querys 6 \
+  --prob_bias 0.005 \
+  --prob_bias_end 50 \
+  --high_freq 0.9 \
+  --threshold_ratio 0.996 \
+  --aux_loss 1 \
+  --aux_loss_factor 0.1 \
+  --dropout 0.35 \
+  --head_dropout 0.1 \
+  --batch_size 32 \
+  --learning_rate 0.006 \
+  --conv_layers 3 \
+  --d_layers 1 \
+  --num_experts 8 \
+  --top_k 2 \
+  --use_moe 1 \
+  --apply_router_aux_loss 1 \
+  --router_aux_loss_factor 0.02 \
+  --train_epochs 20 \
+  --patience 4 \
+  --num_workers 4
+
+accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
+  --task_name long_term_forecast \
+  --is_training 1 \
+  --root_path ../dataset/ETT-small/ \
+  --data_path ETTh2.csv \
+  --model ATM \
+  --data ETTh2 \
+  --features M \
+  --seq_len 96 \
+  --label_len 0 \
+  --pred_len 336 \
+  --factor 3 \
+  --enc_in 7 \
+  --itr 1 \
+  --d_model 32\
+  --inter_dim 32 \
+  --n_heads 8 \
+  --n_querys 8 \
+  --prob_bias 0.00 \
+  --prob_bias_end 30 \
+  --high_freq 1 \
+  --threshold_ratio 0.995 \
+  --aux_loss 1 \
+  --aux_loss_factor 0.15 \
+  --dropout 0.4 \
+  --head_dropout 0.1 \
+  --batch_size 32 \
+  --learning_rate 0.0085 \
+  --conv_layers 4 \
+  --d_layers 1 \
+  --num_experts 8 \
+  --top_k 2 \
+  --use_moe 1 \
+  --apply_router_aux_loss 1 \
+  --router_aux_loss_factor 0.02 \
+  --train_epochs 20 \
+  --patience 4 \
+  --num_workers 4
+
+accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
+  --task_name long_term_forecast \
+  --is_training 1 \
+  --root_path ../dataset/ETT-small/ \
+  --data_path ETTh2.csv \
+  --model ATM \
+  --data ETTh2 \
+  --features M \
+  --seq_len 96 \
+  --label_len 0 \
+  --pred_len 720 \
+  --factor 3 \
+  --enc_in 7 \
+  --itr 1 \
+  --d_model 32\
+  --inter_dim 32 \
+  --n_heads 8 \
+  --n_querys 8 \
+  --prob_bias 0.005 \
+  --prob_bias_end 50 \
+  --high_freq 1 \
+  --threshold_ratio 0.994 \
+  --aux_loss 1 \
+  --aux_loss_factor 0.1 \
+  --dropout 0.42 \
+  --head_dropout 0.1 \
+  --batch_size 32 \
+  --learning_rate 0.016 \
+  --conv_layers 4 \
+  --d_layers 1 \
+  --num_experts 8 \
+  --top_k 2 \
+  --use_moe 1 \
+  --apply_router_aux_loss 1 \
+  --router_aux_loss_factor 0.02 \
+  --train_epochs 20 \
+  --patience 4 \
+  --num_workers 4
