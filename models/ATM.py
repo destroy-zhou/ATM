@@ -4,16 +4,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from transformers import LlamaConfig, LlamaModel, LlamaTokenizer, GPT2Config, GPT2Model, GPT2Tokenizer, BertConfig, \
-    BertModel, BertTokenizer
 from layers.Embed import PatchEmbedding, PositionalEmbedding, TimeFeatureEmbedding
-import transformers
 from layers.StandardNorm import Normalize
 from layers.SelfAttention_Family import AttentionLayer, FullAttention
 from layers.Time_Tokenizer import TimeTokenizer, FFNLayer
-from utils.tools import init_LLM
 
-transformers.logging.set_verbosity_error()
 
 class TemporalBlock(nn.Module):
     def __init__(self, d_model, inter_dim):
@@ -70,22 +65,22 @@ class ExpertsLayer(nn.Module):
             (batch_size * input_len, hidden_dim), dtype=hidden_states.dtype, device=hidden_states.device
         )
 
-        # 计算每个expert被哪些时刻激活
+        # Compute which time steps each expert is activated
         expert_mask = torch.nn.functional.one_hot(selected_experts, num_classes=self.num_experts).permute(2, 1, 0)
         #print(expert_mask,"\n")
 
-        # 枚举expert，计算
+        # Enumerate all expert
         for expert_idx in range(self.num_experts):
             expert_layer = self.experts[expert_idx]
-            # expert排名，时刻
+            # expert ranks and time steps
             idx, top_x = torch.where(expert_mask[expert_idx])
             #print("idx:", idx, "\ntop_x:", top_x,"\n")
 
-            # 每个时刻，对应专家与权重相乘
+            # At each time step, multiply the corresponding expert by its weight
             current_state = hidden_states[None, top_x].reshape(-1, hidden_dim)
             current_hidden_states = expert_layer(current_state) * gate_weights[top_x, idx, None]
 
-            # 进行累加
+            # Adding
             final_hidden_states.index_add_(0, top_x, current_hidden_states.to(hidden_states.dtype))
 
         shared_expert_output = self.shared_expert(hidden_states)
@@ -96,7 +91,7 @@ class ExpertsLayer(nn.Module):
         final_hidden_states = final_hidden_states.reshape(batch_size, input_len, hidden_dim)
         return final_hidden_states, gate_vals
 
-# 计算expert辅助损失
+# Compute the auxiliary loss for the experts
 def load_balancing_loss_func(gate_vals, top_k, num_experts):
     concatenated_gate_vals = torch.cat([layer_gate.to(layer_gate.device) for layer_gate in gate_vals], dim=0)
     #print("\nconcatenated_gate_vals:",concatenated_gate_vals.shape,"\n")
@@ -107,10 +102,10 @@ def load_balancing_loss_func(gate_vals, top_k, num_experts):
 
     expert_mask = torch.nn.functional.one_hot(selected_experts, num_experts)
 
-    # 计算每个expert的token占比
+    # Compute the token proportion for each expert
     tokens_per_expert = torch.mean(expert_mask.float(), dim=0)
 
-    # 计算每个expert的平均路由概率
+    # Compute the average routing probability for each expert
     router_prob_per_expert = torch.mean(gate_weights, dim=0)
     # print(tokens_per_expert.shape, router_prob_per_expert.shape)
 
@@ -241,7 +236,7 @@ class Model(nn.Module):
         self.threshold_ratio = configs.threshold_ratio
         self.model_verbose = configs.model_verbose
         
-        # 动态Patch
+        # Adaptive Patching
         self.time_tokenizer = TimeTokenizer(configs.seq_len, configs.enc_in, configs.d_model, configs.inter_dim, configs.n_querys, 
                                         configs.threshold_ratio, configs.n_heads, configs.dropout, configs.aux_loss, configs.conv_layers,
                                         configs.high_freq, configs.prob_bias, configs.prob_bias_end, configs.use_time_tokenizer, configs.model_verbose)
@@ -289,7 +284,7 @@ class Model(nn.Module):
         n_vars = C
         # x_enc = x_enc.permute(0, 2, 1).contiguous().reshape(B * C, T, 1).contiguous()
 
-        # 进行分块 (batch * variate, seq_len, hidden_dim)
+        # Patching (batch * variate, seq_len, hidden_dim)
         x, aux_loss, patch_pos_mask = self.time_tokenizer(x_enc, train, self.configs.use_semantic_pe)
         # print('patch:', x.shape)
         # x = x + self.temporal_embedding(x_mark_enc)
@@ -308,7 +303,7 @@ class Model(nn.Module):
         x = x.reshape(B, C, T, -1)
         # print('x:', x.shape) 
 
-        # 计算路由辅助损失
+        # Compute the routing auxiliary loss
         if train and self.configs.use_moe and self.configs.apply_router_aux_loss:
             if self.model_verbose:
                 print("aux_loss:", aux_loss.item(), end=', ')

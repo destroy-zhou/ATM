@@ -58,7 +58,7 @@ def data_provider(args, flag):
             seasonal_patterns=args.seasonal_patterns
         )
 
-    # 输出数据集大小    
+    # Output the dataset size  
     print(flag + ".shape: (%d, x: [%d, %d], x_stamp: [%d, %d], y: [%d, %d])" % 
       (len(data_set), data_set[0][0].shape[0], data_set[0][0].shape[1], data_set[0][2].shape[0], 
        data_set[0][2].shape[1], data_set[0][1].shape[0], data_set[0][1].shape[1]))

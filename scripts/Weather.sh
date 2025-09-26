@@ -2,7 +2,7 @@
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/weather/ \
+  --root_path ./dataset/weather/ \
   --data_path weather.csv \
   --model ATM \
   --data Weather \
@@ -41,7 +41,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/weather/ \
+  --root_path ./dataset/weather/ \
   --data_path weather.csv \
   --model ATM \
   --data Weather \
@@ -80,7 +80,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/weather/ \
+  --root_path ./dataset/weather/ \
   --data_path weather.csv \
   --model ATM \
   --data Weather \
@@ -119,7 +119,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/weather/ \
+  --root_path ./dataset/weather/ \
   --data_path weather.csv \
   --model ATM \
   --data Weather \

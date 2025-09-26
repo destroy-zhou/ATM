@@ -2,7 +2,7 @@
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/ETT-small/ \
+  --root_path ./dataset/ETT-small/ \
   --data_path ETTm2.csv \
   --model ATM \
   --data ETTm2 \
@@ -41,7 +41,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/ETT-small/ \
+  --root_path ./dataset/ETT-small/ \
   --data_path ETTm2.csv \
   --model ATM \
   --data ETTm2 \
@@ -80,7 +80,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/ETT-small/ \
+  --root_path ./dataset/ETT-small/ \
   --data_path ETTm2.csv \
   --model ATM \
   --data ETTm2 \
@@ -119,7 +119,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/ETT-small/ \
+  --root_path ./dataset/ETT-small/ \
   --data_path ETTm2.csv \
   --model ATM \
   --data ETTm2 \
@@ -143,7 +143,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --dropout 0.42 \
   --head_dropout 0.1 \
   --batch_size 32 \
-  --learning_rate 0.018 \
+  --learning_rate 0.017 \
   --conv_layers 4 \
   --d_layers 1 \
   --num_experts 8 \

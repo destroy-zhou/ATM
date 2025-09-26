@@ -94,7 +94,7 @@ def get_args():
     parser.add_argument('--use_time_tokenizer', type=int, default=1, help='whether to use time_tokenizer, options:[0-no, 1-yes, 2-use MLP]')
     parser.add_argument('--aux_loss', type=int, default=1, help='whether to use auxiliary loss')
     parser.add_argument('--aux_loss_factor', type=float, default=0.05, help='auxiliary loss factor')
-    parser.add_argument('--use_semantic_pe', type=int, default=1, help='whether to use semantic_pe')
+    parser.add_argument('--use_semantic_pe', type=int, default=1, help='whether to use semantic embedding')
     parser.add_argument('--use_moe', type=int, default=1, help='whether use MoE')
     parser.add_argument('--router_aux_loss_factor', type=float, default=0.02, help='router auxiliary loss factor')
     parser.add_argument('--apply_router_aux_loss', type=int, default=1, help='apply router auxiliary loss')
@@ -104,7 +104,7 @@ def get_args():
                         help='time features encoding, options:[timeF, fixed, learned]')
     parser.add_argument('--activation', type=str, default='gelu', help='activation')
     parser.add_argument('--output_attention', action='store_true', help='whether to output attention in encoder')
-    parser.add_argument('--model_verbose', type=int, default=1, help='whether output details')
+    parser.add_argument('--model_verbose', type=int, default=0, help='whether output details')
 
     # optimization
     parser.add_argument('--num_workers', type=int, default=0, help='data loader num workers')

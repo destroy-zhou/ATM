@@ -2,137 +2,11 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import shutil
-from transformers import LlamaConfig, LlamaModel, LlamaTokenizer, GPT2Config, GPT2Model, GPT2Tokenizer, BertConfig, \
-    BertModel, BertTokenizer
 import os
 
 from tqdm import tqdm
 
 plt.switch_backend('agg')
-
-def init_LLM(configs):
-    if configs.llm_model == 'LLAMA':
-        # self.llama_config = LlamaConfig.from_pretrained('/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/')
-        llama_config = LlamaConfig.from_pretrained('huggyllama/llama-7b')
-        llama_config.num_hidden_layers = configs.llm_layers
-        llama_config.output_attentions = True
-        llama_config.output_hidden_states = True
-        try:
-            llm_model = LlamaModel.from_pretrained(
-                # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/",
-                'huggyllama/llama-7b',
-                trust_remote_code=True,
-                local_files_only=True,
-                config=llama_config,
-                # load_in_4bit=True
-            )
-        except EnvironmentError:  # downloads model from HF is not already done
-            print("Local model files not found. Attempting to download...")
-            llm_model = LlamaModel.from_pretrained(
-                # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/",
-                'huggyllama/llama-7b',
-                trust_remote_code=True,
-                local_files_only=False,
-                config=llama_config,
-                # load_in_4bit=True
-            )
-        try:
-            tokenizer = LlamaTokenizer.from_pretrained(
-                # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/tokenizer.model",
-                'huggyllama/llama-7b',
-                trust_remote_code=True,
-                local_files_only=True
-            )
-        except EnvironmentError:  # downloads the tokenizer from HF if not already done
-            print("Local tokenizer files not found. Atempting to download them..")
-            tokenizer = LlamaTokenizer.from_pretrained(
-                # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/tokenizer.model",
-                'huggyllama/llama-7b',
-                trust_remote_code=True,
-                local_files_only=False
-            )
-    elif configs.llm_model == 'GPT2':
-        gpt2_config = GPT2Config.from_pretrained('../openai-community/gpt2')
-    
-        gpt2_config.num_hidden_layers = configs.llm_layers
-        gpt2_config.output_attentions = True
-        gpt2_config.output_hidden_states = True
-        try:
-            llm_model = GPT2Model.from_pretrained(
-                '../openai-community/gpt2',
-                trust_remote_code=True,
-                local_files_only=True,
-                config=gpt2_config,
-            )
-        except EnvironmentError:  # downloads model from HF is not already done
-            print("Local model files not found. Attempting to download...")
-            llm_model = GPT2Model.from_pretrained(
-                '../openai-community/gpt2',
-                trust_remote_code=True,
-                local_files_only=False,
-                config=gpt2_config,
-            )
-    
-        try:
-            tokenizer = GPT2Tokenizer.from_pretrained(
-                '../openai-community/gpt2',
-                trust_remote_code=True,
-                local_files_only=True
-            )
-        except EnvironmentError:  # downloads the tokenizer from HF if not already done
-            print("Local tokenizer files not found. Atempting to download them..")
-            tokenizer = GPT2Tokenizer.from_pretrained(
-                '../openai-community/gpt2',
-                trust_remote_code=True,
-                local_files_only=False
-            )
-    elif configs.llm_model == 'BERT':
-        bert_config = BertConfig.from_pretrained('google-bert/bert-base-uncased')
-    
-        bert_config.num_hidden_layers = configs.llm_layers
-        bert_config.output_attentions = True
-        bert_config.output_hidden_states = True
-        try:
-            llm_model = BertModel.from_pretrained(
-                'google-bert/bert-base-uncased',
-                trust_remote_code=True,
-                local_files_only=True,
-                config=bert_config,
-            )
-        except EnvironmentError:  # downloads model from HF is not already done
-            print("Local model files not found. Attempting to download...")
-            llm_model = BertModel.from_pretrained(
-                'google-bert/bert-base-uncased',
-                trust_remote_code=True,
-                local_files_only=False,
-                config=bert_config,
-            )
-    
-        try:
-            tokenizer = BertTokenizer.from_pretrained(
-                'google-bert/bert-base-uncased',
-                trust_remote_code=True,
-                local_files_only=True
-            )
-        except EnvironmentError:  # downloads the tokenizer from HF if not already done
-            print("Local tokenizer files not found. Atempting to download them..")
-            tokenizer = BertTokenizer.from_pretrained(
-                'google-bert/bert-base-uncased',
-                trust_remote_code=True,
-                local_files_only=False
-            )
-    else:
-        raise Exception('LLM model is not defined')
-
-    if tokenizer.eos_token:
-        tokenizer.pad_token = tokenizer.eos_token
-    else:
-        pad_token = '[PAD]'
-        tokenizer.add_special_tokens({'pad_token': pad_token})
-        tokenizer.pad_token = pad_token
-
-    return llm_model, tokenizer
-
 
 def adjust_learning_rate(accelerator, optimizer, scheduler, epoch, args, printout=True):
     if args.lradj == 'type1':
@@ -370,8 +244,8 @@ def test(args, accelerator, model, train_loader, vali_loader, criterion):
         true = accelerator.gather_for_metrics(true)
         batch_y_mark = accelerator.gather_for_metrics(batch_y_mark)
 
-        print("first forecast:", pred[0, :, 0].detach().cpu().numpy())
-        print("first target:", true[0, -args.pred_len:].detach().cpu().numpy())
+        # print("first forecast:", pred[0, :, 0].detach().cpu().numpy())
+        # print("first target:", true[0, -args.pred_len:].detach().cpu().numpy())
 
         loss = criterion(x[:, :, 0], args.frequency_map, pred[:, :, 0], true, batch_y_mark)
 

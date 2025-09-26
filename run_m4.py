@@ -1,6 +1,6 @@
 import argparse
 import torch
-from accelerate import Accelerator, DeepSpeedPlugin
+from accelerate import Accelerator
 from accelerate import DistributedDataParallelKwargs
 from torch import optim
 from torch.optim import lr_scheduler
@@ -95,7 +95,7 @@ parser.add_argument('--prob_bias_end', type=int, default=150, help='the ending i
 parser.add_argument('--use_time_tokenizer', type=int, default=1, help='whether to use time_tokenizer, options:[0-no, 1-yes, 2-use MLP]')
 parser.add_argument('--aux_loss', type=int, default=1, help='whether to use auxiliary loss')
 parser.add_argument('--aux_loss_factor', type=float, default=0.05, help='auxiliary loss factor')
-parser.add_argument('--use_semantic_pe', type=int, default=1, help='whether to use semantic_pe')
+parser.add_argument('--use_semantic_pe', type=int, default=1, help='whether to use semantic embedding')
 parser.add_argument('--use_moe', type=int, default=1, help='whether use MoE')
 parser.add_argument('--router_aux_loss_factor', type=float, default=0.02, help='router auxiliary loss factor')
 parser.add_argument('--apply_router_aux_loss', type=int, default=1, help='apply router auxiliary loss')
@@ -105,7 +105,7 @@ parser.add_argument('--embed', type=str, default='timeF',
                     help='time features encoding, options:[timeF, fixed, learned]')
 parser.add_argument('--activation', type=str, default='gelu', help='activation')
 parser.add_argument('--output_attention', action='store_true', help='whether to output attention in ecoder')
-parser.add_argument('--model_verbose', type=int, default=1, help='whether output details')
+parser.add_argument('--model_verbose', type=int, default=0, help='whether output details')
 
 # optimization
 parser.add_argument('--num_workers', type=int, default=0, help='data loader num workers')

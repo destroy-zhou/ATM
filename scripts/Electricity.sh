@@ -1,7 +1,7 @@
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/electricity/ \
+  --root_path ./dataset/electricity/ \
   --data_path electricity.csv \
   --model ATM \
   --data Electricity \
@@ -40,7 +40,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/electricity/ \
+  --root_path ./dataset/electricity/ \
   --data_path electricity.csv \
   --model ATM \
   --data Electricity \
@@ -79,7 +79,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/electricity/ \
+  --root_path ./dataset/electricity/ \
   --data_path electricity.csv \
   --model ATM \
   --data Electricity \
@@ -118,7 +118,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
-  --root_path ../dataset/electricity/ \
+  --root_path ./dataset/electricity/ \
   --data_path electricity.csv \
   --model ATM \
   --data Electricity \
@@ -154,5 +154,3 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --train_epochs 10 \
   --patience 3 \
   --num_workers 4
-
-Smooth_L1
