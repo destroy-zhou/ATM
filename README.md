@@ -20,4 +20,5 @@ Prepare Data. You can obtained the well pre-processed datasets from [OneDrive](h
 
 ```shell
 sh ./scripts/ETTh1.sh
+sh ./scripts/M4.sh
 ```

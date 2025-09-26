@@ -367,6 +367,7 @@ if __name__ == '__main__':
             if early_stopping.early_stop:
                 accelerator.print("Early stopping")
                 break
+            print()
 
     accelerator.wait_for_everyone()
     if accelerator.is_local_main_process:

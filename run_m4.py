@@ -269,6 +269,7 @@ if __name__ == '__main__':
                 adjust_learning_rate(accelerator, model_optim, scheduler, epoch + 1, args, printout=True)
             else:
                 accelerator.print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
+            print()
 
         best_model_path = path + best_setting + '/' + 'checkpoint.pt'
         accelerator.wait_for_everyone()
