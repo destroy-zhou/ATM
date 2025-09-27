@@ -10,10 +10,6 @@ Given a python environment (**note**: this project is tested under python 3.9), 
 pip install -r requirements.txt
 ```
 
-### Data preparation
-
-Prepare Data. You can obtained the well pre-processed datasets from [Google Drive](https://drive.google.com/file/d/1xVBak3r6g-8oPo7_uPFwLY_QggyEn8C7/view?usp=sharing). Then place the downloaded data under the folder `./dataset`. 
-
 ### Train and evaluate model
 
 - We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
