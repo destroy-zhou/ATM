@@ -2,6 +2,9 @@ checkpoints/*
 test/*
 dataset/*
 scp.txt
+scripts_train/*
+scripts - 副本/
+figures - 副本/
 
 # Translations
 *.mo

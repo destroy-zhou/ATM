@@ -1,4 +1,3 @@
-
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
   --is_training 1 \
@@ -17,16 +16,16 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --inter_dim 32 \
   --n_heads 8 \
   --n_querys 8 \
-  --prob_bias 0.005 \
+  --prob_bias 0.00 \
   --prob_bias_end 70 \
   --high_freq 1 \
-  --threshold_ratio 0.995 \
+  --threshold_ratio 0.93 \
   --aux_loss 1 \
   --aux_loss_factor 0.15 \
   --dropout 0.45 \
   --head_dropout 0.1 \
   --batch_size 32 \
-  --learning_rate 0.01 \
+  --learning_rate 0.018 \
   --conv_layers 3 \
   --d_layers 1 \
   --num_experts 8 \
@@ -36,7 +35,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --router_aux_loss_factor 0.02 \
   --train_epochs 20 \
   --patience 4 \
-  --num_workers 4
+  --num_workers 0
 
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
@@ -54,18 +53,18 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --itr 1 \
   --d_model 32\
   --inter_dim 32 \
-  --n_heads 8 \
+  --n_heads 2 \
   --n_querys 6 \
-  --prob_bias 0.005 \
+  --prob_bias 0.00 \
   --prob_bias_end 50 \
   --high_freq 1 \
-  --threshold_ratio 0.996 \
+  --threshold_ratio 0.97 \
   --aux_loss 1 \
-  --aux_loss_factor 0.1 \
+  --aux_loss_factor 0.16 \
   --dropout 0.35 \
   --head_dropout 0.1 \
   --batch_size 32 \
-  --learning_rate 0.006 \
+  --learning_rate 0.024 \
   --conv_layers 3 \
   --d_layers 1 \
   --num_experts 8 \
@@ -75,7 +74,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --router_aux_loss_factor 0.02 \
   --train_epochs 20 \
   --patience 4 \
-  --num_workers 4
+  --num_workers 0
 
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
@@ -93,18 +92,18 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --itr 1 \
   --d_model 32\
   --inter_dim 32 \
-  --n_heads 8 \
+  --n_heads 1 \
   --n_querys 8 \
   --prob_bias 0.00 \
   --prob_bias_end 30 \
   --high_freq 1 \
-  --threshold_ratio 0.995 \
+  --threshold_ratio 0.96 \
   --aux_loss 1 \
   --aux_loss_factor 0.15 \
   --dropout 0.4 \
   --head_dropout 0.1 \
   --batch_size 32 \
-  --learning_rate 0.0085 \
+  --learning_rate 0.009 \
   --conv_layers 4 \
   --d_layers 1 \
   --num_experts 8 \
@@ -114,7 +113,7 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --router_aux_loss_factor 0.02 \
   --train_epochs 20 \
   --patience 4 \
-  --num_workers 4
+  --num_workers 0
 
 accelerate launch --config_file accelerrate_config.yaml --main_process_port 10097 run_main.py \
   --task_name long_term_forecast \
@@ -132,12 +131,12 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --itr 1 \
   --d_model 32\
   --inter_dim 32 \
-  --n_heads 8 \
+  --n_heads 4 \
   --n_querys 8 \
   --prob_bias 0.005 \
   --prob_bias_end 50 \
   --high_freq 1 \
-  --threshold_ratio 0.994 \
+  --threshold_ratio 0.995 \
   --aux_loss 1 \
   --aux_loss_factor 0.1 \
   --dropout 0.42 \
@@ -153,4 +152,4 @@ accelerate launch --config_file accelerrate_config.yaml --main_process_port 1009
   --router_aux_loss_factor 0.02 \
   --train_epochs 20 \
   --patience 4 \
-  --num_workers 4
+  --num_workers 0

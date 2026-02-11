@@ -1,10 +1,10 @@
-# ATM: Adaptive Time Series Tokenization with Semantic Modeling
+# ATM: Adaptive Arbitrary-Length Tokenization with Semantic Modeling for Time Series Forecasting
 
 ## Quickstart
 
 ### Installation
 
-Given a python environment (**note**: this project is tested under python 3.9), install the dependencies with the following command:
+Given a python environment (**note**: this project is tested under python 3.11), install the dependencies with the following command:
 
 ```
 pip install -r requirements.txt
