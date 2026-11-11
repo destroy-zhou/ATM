@@ -31,3 +31,14 @@ bash ./scripts/Univariate/ATM.sh
 ```
 
 To test only one dataset or horizon, run the corresponding command from the script. Results are saved under `./result/` according to `--save-path`.
+
+### Baselines
+
+EMAformer, TimeMosaic, APN, MMPD, SRSNet, DUET, PatchMLP, HDMixer, and PatchTST are also included. Each model has a multivariate script under `scripts/` and a univariate script under `scripts/Univariate/`:
+
+```shell
+bash ./scripts/PatchTST.sh
+bash ./scripts/Univariate/PatchTST.sh
+```
+
+Replace `PatchTST` with the desired model name. GPU IDs and model parameters follow each script; edit `--gpus` as needed.
