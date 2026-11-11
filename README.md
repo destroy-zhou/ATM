@@ -1,23 +1,33 @@
-# ATM: Adaptive Arbitrary-Length Tokenization with Semantic Modeling for Time Series Forecasting
+# ATM: Adaptive Tokenization with Lightweight Modeling for Time Series Forecasting
 
 ## Quickstart
 
 ### Installation
 
-Given a python environment (**note**: this project is tested under python 3.11), install the dependencies with the following command:
+Create a Python environment and install the dependencies:
 
+```shell
+pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu128
 ```
-pip install -r requirements.txt
-```
+
+The requirements use PyTorch with CUDA 12.8. For CPU-only environments, install a CPU version of PyTorch instead.
 
 ### Train and evaluate model
 
-- Datasets can be easily downloaded from the Internet. Please place the downloaded data under the folder `./dataset`.
+Place the dataset CSV files under `./dataset/forecasting/` (e.g., `ETTh1.csv`, `Weather.csv`). Wide-format CSV files should contain a `date` column followed by the numerical variable columns.
 
-- We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
+Run the following commands with Bash. The scripts use GPU 0 by default; edit `--gpus` to select another GPU.
+
+Multivariate forecasting (nine datasets, horizons 96, 192, 336, and 720):
 
 ```shell
-sh ./scripts/ETTh1.sh
-
-sh ./scripts/M4.sh
+bash ./scripts/ATM.sh
 ```
+
+Univariate forecasting (ETTh2, ETTm2, Exchange, and Solar; the last channel only):
+
+```shell
+bash ./scripts/Univariate/ATM.sh
+```
+
+To test only one dataset or horizon, run the corresponding command from the script. Results are saved under `./result/` according to `--save-path`.
